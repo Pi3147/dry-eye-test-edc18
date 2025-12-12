@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "site": "komet-admin-panel",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

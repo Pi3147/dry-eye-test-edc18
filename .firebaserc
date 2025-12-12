@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "dry-eye-test-edc18": {
+      "hosting": {
+        "komet-admin-panel": [
+          "dry-eye-test-edc18"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "dry-eye-test-edc18"
+  }
+}

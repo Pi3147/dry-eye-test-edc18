@@ -1,0 +1,133 @@
+:host {
+  display: block;
+}
+
+.accordion {
+  max-width: 900px;
+  margin: 16px auto;
+}
+
+.accordion-item {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: #f9fafb;
+  border: 0;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s ease;
+}
+
+.accordion-header:hover {
+  background: #f3f4f6;
+}
+
+.accordion-header.expanded {
+  background: #eef2ff;
+}
+
+.accordion-header .title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.accordion-header .name {
+  font-weight: 600;
+  color: #111827;
+}
+
+.accordion-header .meta {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.chevron {
+  font-size: 12px;
+  color: #6b7280;
+  transition: transform 0.2s ease;
+}
+
+.chevron.rotated {
+  transform: rotate(180deg);
+}
+
+.accordion-panel {
+  padding: 8px 16px 16px 16px;
+  background: #fff;
+}
+
+.calculator-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin: 8px 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.calculator-item {
+  padding: 8px 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #111827;
+}
+
+.calculator-item.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.calculator-item .left {
+  font-weight: 600;
+}
+
+.calculator-item .right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calculator-item .right select {
+  padding: 6px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.calculator-item .right .download-btn {
+  padding: 6px 10px;
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.calculator-item .right .download-btn[disabled] {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.empty {
+  color: #6b7280;
+  font-size: 13px;
+  padding: 8px 16px;
+}
+
+

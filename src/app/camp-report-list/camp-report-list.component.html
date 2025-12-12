@@ -1,0 +1,33 @@
+<div class="accordion">
+  <div *ngFor="let org of organizations" class="accordion-item">
+    <button class="accordion-header" (click)="toggle(org.id)" [class.expanded]="expanded[org.id]">
+      <div class="title">
+        <span class="name">{{ org?.name || org?.id }}</span>
+        <span class="meta" *ngIf="org.calculators?.length">{{ org.calculators?.length }} calculators</span>
+      </div>
+      <span class="chevron" [class.rotated]="expanded[org.id]">▼</span>
+    </button>
+    <div class="accordion-panel" *ngIf="expanded[org.id]">
+      <ul class="calculator-list" *ngIf="org.calculators?.length; else noCalcs">
+        <li class="calculator-item row" *ngFor="let calc of org.calculators">
+          <div class="left">{{ formatCalculator(calc) }}</div>
+          <div class="right">
+            <select [ngModel]="selectedYearByKey[rowKey(org.id, calc)]" (ngModelChange)="onYearChange(org.id, calc, $event)">
+              <option *ngFor="let y of yearOptions" [ngValue]="y">{{ y }}</option>
+            </select>
+            <select [ngModel]="selectedMonthByKey[rowKey(org.id, calc)]" (ngModelChange)="onMonthChange(org.id, calc, $event)">
+              <option *ngFor="let m of monthOptions" [ngValue]="m.value">{{ m.label }}</option>
+            </select>
+            <button class="download-btn" (click)="download(org, calc)" [disabled]="loadingByKey[rowKey(org.id, calc)]">
+              {{ loadingByKey[rowKey(org.id, calc)] ? 'Downloading...' : 'Download' }}
+            </button>
+          </div>
+        </li>
+      </ul>
+      <ng-template #noCalcs>
+        <div class="empty">No calculators</div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="empty" *ngIf="!organizations?.length">No organizations found</div>
+</div>

@@ -1,0 +1,51 @@
+<div class="prescription-container">
+  <h2>Prescription Brands Management</h2>
+
+  <!-- Error message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Loading state -->
+  <div *ngIf="isLoading" class="loading-state">
+    Loading brands...
+  </div>
+
+  <!-- Add new brand -->
+  <div class="add-brand-section">
+    <input 
+      type="text" 
+      [(ngModel)]="newBrand" 
+      placeholder="Enter new brand name"
+      (keyup.enter)="addBrand()"
+      [disabled]="isLoading"
+    >
+    <button (click)="addBrand()" [disabled]="isLoading">Add Brand</button>
+  </div>
+
+  <!-- Brands list -->
+  <div class="brands-list">
+    <div *ngFor="let brand of prescription_brands; let i = index" class="brand-item">
+      <div *ngIf="editingIndex !== i" class="brand-display">
+        <span>{{ brand }}</span>
+        <div class="actions">
+          <button (click)="startEdit(i)" class="edit-btn" [disabled]="isLoading">Edit</button>
+          <button (click)="deleteBrand(i)" class="delete-btn" [disabled]="isLoading">Delete</button>
+        </div>
+      </div>
+      
+      <div *ngIf="editingIndex === i" class="brand-edit">
+        <input 
+          type="text" 
+          [(ngModel)]="editBrand"
+          (keyup.enter)="saveEdit()"
+          [disabled]="isLoading"
+        >
+        <div class="actions">
+          <button (click)="saveEdit()" class="save-btn" [disabled]="isLoading">Save</button>
+          <button (click)="cancelEdit()" class="cancel-btn" [disabled]="isLoading">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
