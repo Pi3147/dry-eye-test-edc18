@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "komet-admin-panel": {
+    "dry-eye-detect-admin": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,7 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/komet-admin-panel",
+            "outputPath": "dist/dry-eye-detect-admin",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -63,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "komet-admin-panel:build:production"
+              "buildTarget": "dry-eye-detect-admin:build:production"
             },
             "development": {
-              "buildTarget": "komet-admin-panel:build:development"
+              "buildTarget": "dry-eye-detect-admin:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "komet-admin-panel:build"
+            "buildTarget": "dry-eye-detect-admin:build"
           }
         },
         "test": {
@@ -103,12 +103,12 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "komet-admin-panel:build:production",
-              "serveTarget": "komet-admin-panel:serve:production"
+              "buildTarget": "dry-eye-detect-admin:build:production",
+              "serveTarget": "dry-eye-detect-admin:serve:production"
             },
             "development": {
-              "buildTarget": "komet-admin-panel:build:development",
-              "serveTarget": "komet-admin-panel:serve:development"
+              "buildTarget": "dry-eye-detect-admin:build:development",
+              "serveTarget": "dry-eye-detect-admin:serve:development"
             }
           },
           "defaultConfiguration": "production"

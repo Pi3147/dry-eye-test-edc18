@@ -2,7 +2,7 @@
   "targets": {
     "dry-eye-test-edc18": {
       "hosting": {
-        "komet-admin-panel": [
+        "detect-admin": [
           "dry-eye-test-edc18"
         ]
       }

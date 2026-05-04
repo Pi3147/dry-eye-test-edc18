@@ -9,5 +9,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'komet-admin-panel';
+  title = 'dry-eye-detect-admin';
 }

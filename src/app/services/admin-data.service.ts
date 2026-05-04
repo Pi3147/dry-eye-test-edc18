@@ -566,25 +566,53 @@ export class AdminDataService {
     return refs;
   }
   async getNextLogs(last: any, calcName: string): Promise<any[]> {
-    await this.loadAllMrs();
-
-    const mrRefs = this.getValidMrRefs();
-    if (mrRefs.length === 0) {
-      console.warn('No valid MR references — returning empty logs');
-      return [];
-    }
-    const chunks = chunkArray(mrRefs, 30);
     const logs: any[] = [];
     let lastDate = last?.date ?? Timestamp.fromMillis(0);
+    // await this.loadAllMrs();
 
-    for (const chunk of chunks) {
-      if (logs.length >= 10) break;
+    // const mrRefs = this.getValidMrRefs();
+    // if (mrRefs.length === 0) {
+    //   console.warn('No valid MR references — returning empty logs');
+    //   return [];
+    // }
+    // const chunks = chunkArray(mrRefs, 30);
 
-      const querySnapshot = await this.fireStore
+    // for (const chunk of chunks) {
+    //   if (logs.length >= 10) break;
+
+    //   const querySnapshot = await this.fireStore
+    //     .collection('score-logs', (ref) =>
+    //       ref
+    //         .where('calculator_name', '==', calcName)
+    //         .where('mr_id', 'in', chunk)
+    //         .orderBy('date')
+    //         .startAfter(lastDate)
+    //         .limit(10 - logs.length)
+    //     )
+    //     .get()
+    //     .toPromise();
+
+    //   // querySnapshot is guaranteed after await
+    //   querySnapshot!.docs.forEach((doc) => {
+    //     const data = doc.data() as { [key: string]: any };
+    //     logs.push({
+    //       id: doc.id,
+    //       ...data,
+    //       date: data['date'] as Timestamp,
+    //       mr_id: data['mr_id'] as DocumentReference,
+    //     });
+    //   });
+
+    //   if (querySnapshot!.docs.length > 0) {
+    //     const lastDoc = querySnapshot!.docs[querySnapshot!.docs.length - 1];
+    //     lastDate = (lastDoc.data() as { [key: string]: any })['date'] as Timestamp;
+    //   }
+    // }
+
+    const querySnapshot = await this.fireStore
         .collection('score-logs', (ref) =>
           ref
             .where('calculator_name', '==', calcName)
-            .where('mr_id', 'in', chunk)
             .orderBy('date')
             .startAfter(lastDate)
             .limit(10 - logs.length)
@@ -602,12 +630,6 @@ export class AdminDataService {
           mr_id: data['mr_id'] as DocumentReference,
         });
       });
-
-      if (querySnapshot!.docs.length > 0) {
-        const lastDoc = querySnapshot!.docs[querySnapshot!.docs.length - 1];
-        lastDate = (lastDoc.data() as { [key: string]: any })['date'] as Timestamp;
-      }
-    }
 
     return logs;
   }
@@ -666,24 +688,44 @@ export class AdminDataService {
   }
 
 async getPrevLogs(first: any, calcName: string): Promise<any[]> {
-    await this.loadAllMrs();
+  const logs: any[] = [];
+    // await this.loadAllMrs();
 
-    const mrRefs = this.getValidMrRefs();
-    if (mrRefs.length === 0) {
-      console.warn('No valid MR references — returning empty logs');
-      return [];
-    }
-    const chunks = chunkArray(mrRefs, 30);
-    const logs: any[] = [];
+    // const mrRefs = this.getValidMrRefs();
+    // if (mrRefs.length === 0) {
+    //   console.warn('No valid MR references — returning empty logs');
+    //   return [];
+    // }
+    // const chunks = chunkArray(mrRefs, 30);
 
-    for (const chunk of chunks) {
-      if (logs.length >= 10) break;
+    // for (const chunk of chunks) {
+    //   if (logs.length >= 10) break;
 
-      const querySnapshot = await this.fireStore
+    //   const querySnapshot = await this.fireStore
+    //     .collection('score-logs', (ref) =>
+    //       ref
+    //         .where('calculator_name', '==', calcName)
+    //         .where('mr_id', 'in', chunk)
+    //         .orderBy('date', 'desc')
+    //         .endBefore(first ? first.date : Timestamp.now())
+    //         .limit(10 - logs.length)
+    //     )
+    //     .get()
+    //     .toPromise();
+
+    //   const batch = querySnapshot!.docs.map((doc) => ({
+    //     id: doc.id,
+    //     ...(doc.data() as { [key: string]: any }),
+    //   }));
+
+    //   logs.unshift(...batch); // prepend because we used desc order
+    // }
+
+    const querySnapshot = await this.fireStore
         .collection('score-logs', (ref) =>
           ref
             .where('calculator_name', '==', calcName)
-            .where('mr_id', 'in', chunk)
+            // .where('mr_id', 'in', chunk)
             .orderBy('date', 'desc')
             .endBefore(first ? first.date : Timestamp.now())
             .limit(10 - logs.length)
@@ -696,9 +738,7 @@ async getPrevLogs(first: any, calcName: string): Promise<any[]> {
         ...(doc.data() as { [key: string]: any }),
       }));
 
-      logs.unshift(...batch); // prepend because we used desc order
-    }
-
+      logs.unshift(...batch);
     return logs.slice(0, 10);
   }
 

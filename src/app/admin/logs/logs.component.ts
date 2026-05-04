@@ -406,7 +406,7 @@ import { AuthService } from '../../services/auth.service'; // adjust path if nee
 export class LogsComponent {
   user: any = null;
   calcName: string = 'dry-eye-test'; // default
-  base_url = 'https://kometfunction-cmndbj7gmq-uc.a.run.app';
+  base_url = 'https://dryeyefunction-xbd2bdli2a-uc.a.run.app';
 
   reportLoadingState: Record<string, boolean> = {
     'gerd-report': false,
@@ -425,6 +425,7 @@ export class LogsComponent {
     'copd-punjabi-report': false,
     'copd-tamil-report': false,
     'copd-telgu-report': false,
+    'dry-eye-camp-report': false,
     'saar-report': false,
   };
 
@@ -517,7 +518,7 @@ export class LogsComponent {
   }
 
   nextPage() {
-    if (!this.isFilterDate) {
+    // if (!this.isFilterDate) {
       this.adminDataService.getNextLogs(this.last, this.calcName).then((logs: any) => {
         if (logs.length > 0) {
           this.last = logs[logs.length - 1];   // whole object
@@ -528,22 +529,22 @@ export class LogsComponent {
           this.disableNext = true;
         }
       });
-    } else {
-      this.adminDataService.getNextLogsFilterDate(this.last, this.calcName, this.filterFromDate, this.filterToDate).then((logs: any) => {
-        if (logs.length > 0) {
-          this.last = logs[logs.length - 1];
-          this.first = logs[0];
-          this.logs = logs;
-          this.disablePrev = false;
-        } else {
-          this.disableNext = true;
-        }
-      });
-    }
+    // } else {
+    //   this.adminDataService.getNextLogsFilterDate(this.last, this.calcName, this.filterFromDate, this.filterToDate).then((logs: any) => {
+    //     if (logs.length > 0) {
+    //       this.last = logs[logs.length - 1];
+    //       this.first = logs[0];
+    //       this.logs = logs;
+    //       this.disablePrev = false;
+    //     } else {
+    //       this.disableNext = true;
+    //     }
+    //   });
+    // }
   }
 
   prevPage() {
-    if (!this.isFilterDate) {
+    // if (!this.isFilterDate) {
       this.adminDataService.getPrevLogs(this.first, this.calcName).then((logs: any) => {
         if (logs.length > 0) {
           this.last = logs[logs.length - 1];
@@ -554,18 +555,18 @@ export class LogsComponent {
           this.disablePrev = true;
         }
       });
-    } else {
-      this.adminDataService.getPrevLogsFilterDate(this.first, this.calcName, this.filterFromDate, this.filterToDate).then((logs: any) => {
-        if (logs.length > 0) {
-          this.last = logs[logs.length - 1];
-          this.first = logs[0];
-          this.logs = logs;
-          this.disableNext = false;
-        } else {
-          this.disablePrev = true;
-        }
-      });
-    }
+    // } else {
+    //   this.adminDataService.getPrevLogsFilterDate(this.first, this.calcName, this.filterFromDate, this.filterToDate).then((logs: any) => {
+    //     if (logs.length > 0) {
+    //       this.last = logs[logs.length - 1];
+    //       this.first = logs[0];
+    //       this.logs = logs;
+    //       this.disableNext = false;
+    //     } else {
+    //       this.disablePrev = true;
+    //     }
+    //   });
+    // }
   }
 
   // Helper functions — now safe and correct for your Firestore format
